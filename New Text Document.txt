@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Tcs_ipa
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Associate[] a=new Associate[5];
+            for(int i = 0; i < a.Length; i++)
+            {
+                int id=Convert.ToInt32(Console.ReadLine());
+                string name = Console.ReadLine();
+                string value = Console.ReadLine();
+                int exy = Convert.ToInt32(Console.ReadLine());
+                a[i]=new Associate(id, name, value,exy);
+            }
+            string tech = Console.ReadLine();
+            Associate[] res1 = func1(a, tech);
+            Console.WriteLine("\n");
+            for (int i=0;i<res1.Length; i++)
+            {
+                if (res1[i] != null)
+                {
+                    Console.WriteLine(res1[i].id);
+                }
+            }
+            Console.ReadLine();
+
+        }
+        static Associate[] func1(Associate[] a,string tech)
+        {
+            Associate[] arr=new Associate[5];
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i].tech.Equals(tech) && (a[i].exy % 5 == 0))
+                {
+                    arr[i]= a[i];
+                }
+                else
+                {
+                    arr[i] = null;
+                }
+            }
+            return arr;
+        }
+
+    }
+    class Associate
+    {
+        public int id,exy;
+        public string name, tech;
+        public Associate(int id,string name,string tech,int exy)
+        {
+            this.id = id;
+            this.name = name;
+            this.tech = tech;
+            this.exy = exy;
+        }
+        public int getId() { return id; }
+        public string getName() { return name; }
+        public string getTech() { return tech;}
+        public int getExy() {  return exy; }
+    }
+}
